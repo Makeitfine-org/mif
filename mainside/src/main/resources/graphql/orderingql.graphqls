@@ -1,0 +1,15 @@
+type Ordering {
+    id: ID!,
+    description: String,
+    status: String,
+    item: Item
+}
+
+extend type Query {
+    orders(count: Int):[Ordering]
+    order(id: ID):Ordering
+}
+
+extend type Mutation {
+    createOrder(description: String!, status: String, item: ID!):Ordering
+}

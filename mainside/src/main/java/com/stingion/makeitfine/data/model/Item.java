@@ -49,7 +49,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "Item_gen")
     private Integer id;
 
-    @Column(name = "HEADER", unique = true)
+    @Column(name = "HEADER", unique = true, nullable = false)
     @Size(min = ModelConstants.MIN_ITEM_LENGTH)
     private String header;
 

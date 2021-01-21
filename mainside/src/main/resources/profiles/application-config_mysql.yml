@@ -40,3 +40,10 @@ spring:
     user: @db.username@
     password: @db.password@
     locations: classpath:@db.migration@
+
+graphql:
+  servlet:
+    mapping: /apis/graphql
+
+graphiql:
+  endpoint: ${graphql.servlet.mapping}

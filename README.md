@@ -53,3 +53,14 @@ https://github.com/obsidiandynamics/kafdrop/releases
 2) $>java -jar ~/dev/software/kafdrop-3.27.0.jar --kafka.brokerConnect=<host:port,host:port> (e.g localhost:9093,..)
  * It's necessary for brokerConnect contains all brokers from _consumer_offset to success run.
  Otherwise reboot PC or add localhost:9092
+   
+Mysql database help:
+SET GLOBAL validate_password_policy=LOW;
+
+CREATE USER 'makeitfinemysql'@'localhost' IDENTIFIED BY 'makeitfine121';
+
+SHOW VARIABLES LIKE 'validate_password%';
+
+SET GLOBAL validate_password.policy = 0;
+
+GRANT ALL PRIVILEGES ON makeitfinemysql.* TO 'makeitfinemysql'@'localhost';

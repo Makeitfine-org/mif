@@ -1,0 +1,16 @@
+type Item {
+    id: ID!,
+    header: String,
+    price: Float
+}
+
+# Root
+type Query {
+    items(count: Int):[Item]
+    item(id: ID):Item
+}
+
+# Root
+type Mutation {
+    createItem(header: String!, price: Float):Item
+}
