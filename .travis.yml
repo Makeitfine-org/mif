@@ -1,33 +1,34 @@
 language: java
 jdk:
   - openjdk11
-
-before_install:
-  - sudo apt-get install jq
-  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/6.0.0/codacy-coverage-reporter-6.0.0-assembly.jar
-
-addons:
-  sonarcloud:
-    organization: makeitfine-org
-    token:
-      secure: yM3J3iG4NwPT4xY0xDtizxpQKpQ3jwjl7+mMOIGwBp8dLJMgiHUYjKDTcS7icayKdB/Lf/yysEdY7/MqHhGwFQZYniXpLStR9GkIlATWfCJpJ5XlwUr5MkJY7lT73fuqFpfcFk9ibOlkUZLxyIZdM2TrVa/5UcSC8AvyZ5sVOZp8EcPyojADLZrRh9z17YRWNdGbP5ALPSP2rLqurhkW5sLvj7OteGbp5dFPEQgCKKvbw7IAeQLRQTuRnDToiJs4GKvUQeb++dXFzw6U/aDzLrffrNMW7uQotwdptwkreIJuUKG+jyOzXym6mt6pBx8R9RayCD4QpLig0UpFvts+sNegyx/bBQcc0SrBuU69hwJIpJ05szUQDJya7uQcByTawcEYcXNHuXfEtnCVevrJ3kqd8N3cuAJWeNtxqq/CXhUJKgbXIEehwDFLd+OQS+tWNQyMNjy+bfg9FxQ3fActtGqUGi2NPPWFRyvPiVE8sLC4Af8CmumiYEdcQMX1dpo4bEw0ph3M9y7TclDn+BZ9B5QY3s6bf9/lqKyiunfJNCcmKZskCmzaZzDFN23bNv8GIeUlFd9SljLmlJaDkuyOjsAmFWJjwtbOp5SSBivZoW8e02hdeSP2XjrfcSXju052S4jECMGIfAhjdmP0B2SnliyoYiSTdkMi2H5+W8JLEnI=
+#
+#before_install:
+#  - sudo apt-get install jq
+#  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/6.0.0/codacy-coverage-reporter-6.0.0-assembly.jar
+#
+#addons:
+#  sonarcloud:
+#    organization: makeitfine-org
+#    token:
+#      secure: yM3J3iG4NwPT4xY0xDtizxpQKpQ3jwjl7+mMOIGwBp8dLJMgiHUYjKDTcS7icayKdB/Lf/yysEdY7/MqHhGwFQZYniXpLStR9GkIlATWfCJpJ5XlwUr5MkJY7lT73fuqFpfcFk9ibOlkUZLxyIZdM2TrVa/5UcSC8AvyZ5sVOZp8EcPyojADLZrRh9z17YRWNdGbP5ALPSP2rLqurhkW5sLvj7OteGbp5dFPEQgCKKvbw7IAeQLRQTuRnDToiJs4GKvUQeb++dXFzw6U/aDzLrffrNMW7uQotwdptwkreIJuUKG+jyOzXym6mt6pBx8R9RayCD4QpLig0UpFvts+sNegyx/bBQcc0SrBuU69hwJIpJ05szUQDJya7uQcByTawcEYcXNHuXfEtnCVevrJ3kqd8N3cuAJWeNtxqq/CXhUJKgbXIEehwDFLd+OQS+tWNQyMNjy+bfg9FxQ3fActtGqUGi2NPPWFRyvPiVE8sLC4Af8CmumiYEdcQMX1dpo4bEw0ph3M9y7TclDn+BZ9B5QY3s6bf9/lqKyiunfJNCcmKZskCmzaZzDFN23bNv8GIeUlFd9SljLmlJaDkuyOjsAmFWJjwtbOp5SSBivZoW8e02hdeSP2XjrfcSXju052S4jECMGIfAhjdmP0B2SnliyoYiSTdkMi2H5+W8JLEnI=
 
 script:
   #mvn clean verify
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dsonar.projectKey=com.stingion:makeitfine -T 1C
+#  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dsonar.projectKey=com.stingion:makeitfine -T 1C
+  - mvn clean compile
 
-cache:
-  directories:
-    - $HOME/.m2
-
-after_success:
-  - java -jar codacy-coverage-reporter-6.0.0-assembly.jar report -l Java -r mainside/target/site/jacoco/jacoco.xml
-  - bash <(curl -s https://codecov.io/bash)
-
-notifications:
-  slack:
-    rooms:
-      secure: bbRlLE0Jflh/wHLXZNqNR4DBg0W1uFG6kvlgeDdM2AP1NbVzi3TYvL6NYKglMNgteyN2W2YuDt1lStSuEcbOhyzsgH30nY2ykzHzz8DwDi/6LG07vUmZH+CVg3tfk7PRaX+2Bf6oErWCip5qf5PfstCLSCy50V5GjX98YK654N9BcLnfj+JUnlih9NwmAdnFGYtL8sW65VMmRuxDpbDjIxeaP+yaf+JSQ6ioGcO0/H6p+RhtOpaSHmqYCVOwUtVV6DbJcniKecyimn0actxPUMZ7ueIP9PCtC3JMv5ApIBuF8nO6NIRWSpdJ5cgDmBUDh209kLHsV5Hp/b+mC1I3a3j5PdtYzVVfoYfemTYnkjyje0A8vw4sZa5WGx8C9Y7vph6UFnB1+JJJMBnzzK1diFfwc0GRtjVRoB3p0m5ubkFZw4unTW9CvngPl/SIoMjkMLknxO1GXGS/Iv/e3tWI0wtNHw4UpgblC966Nw77+r0OtoRek1zuIIzW4MLPu+gSOUScrNao5fsrWNQagPttNlhZCLOA68CnaTSAAoo5Wd63ab1luC+yAGqlb0n40kvaoLX15QnanESeHSsXVcrYfnuYHYJXOZh5G/OcWCuvr1M/4djCw0Qybiq0ezsiUhbwCTnSBoC994QB42+LUHx2WxaU48lxSXFRRsoF2t8SNSU=
-    on_success: change
-    on_failure: always
+#cache:
+#  directories:
+#    - $HOME/.m2
+#
+#after_success:
+#  - java -jar codacy-coverage-reporter-6.0.0-assembly.jar report -l Java -r mainside/target/site/jacoco/jacoco.xml
+#  - bash <(curl -s https://codecov.io/bash)
+#
+#notifications:
+#  slack:
+#    rooms:
+#      secure: bbRlLE0Jflh/wHLXZNqNR4DBg0W1uFG6kvlgeDdM2AP1NbVzi3TYvL6NYKglMNgteyN2W2YuDt1lStSuEcbOhyzsgH30nY2ykzHzz8DwDi/6LG07vUmZH+CVg3tfk7PRaX+2Bf6oErWCip5qf5PfstCLSCy50V5GjX98YK654N9BcLnfj+JUnlih9NwmAdnFGYtL8sW65VMmRuxDpbDjIxeaP+yaf+JSQ6ioGcO0/H6p+RhtOpaSHmqYCVOwUtVV6DbJcniKecyimn0actxPUMZ7ueIP9PCtC3JMv5ApIBuF8nO6NIRWSpdJ5cgDmBUDh209kLHsV5Hp/b+mC1I3a3j5PdtYzVVfoYfemTYnkjyje0A8vw4sZa5WGx8C9Y7vph6UFnB1+JJJMBnzzK1diFfwc0GRtjVRoB3p0m5ubkFZw4unTW9CvngPl/SIoMjkMLknxO1GXGS/Iv/e3tWI0wtNHw4UpgblC966Nw77+r0OtoRek1zuIIzW4MLPu+gSOUScrNao5fsrWNQagPttNlhZCLOA68CnaTSAAoo5Wd63ab1luC+yAGqlb0n40kvaoLX15QnanESeHSsXVcrYfnuYHYJXOZh5G/OcWCuvr1M/4djCw0Qybiq0ezsiUhbwCTnSBoC994QB42+LUHx2WxaU48lxSXFRRsoF2t8SNSU=
+#    on_success: change
+#    on_failure: always
