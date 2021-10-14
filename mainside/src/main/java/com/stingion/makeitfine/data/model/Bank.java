@@ -7,6 +7,7 @@
 
 package com.stingion.makeitfine.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.stingion.makeitfine.data.model.utils.ModelConstants;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -54,6 +55,7 @@ public class Bank {
     private String name;
 
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<CreditCard> creditCards;
 
     public Bank(String name) {

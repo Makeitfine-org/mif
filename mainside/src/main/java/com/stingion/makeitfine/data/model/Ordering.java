@@ -7,6 +7,7 @@
 
 package com.stingion.makeitfine.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.stingion.makeitfine.data.model.utils.OrderingStatus;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javax.annotation.Nullable;
@@ -61,10 +62,12 @@ public class Ordering {
 
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
+    @JsonIgnore
     private Item item;
 
     @ManyToOne
     @JoinColumn(name = "CREDIT_CARD_ID")
+    @JsonIgnore
     private CreditCard creditCard;
 
     @Override
