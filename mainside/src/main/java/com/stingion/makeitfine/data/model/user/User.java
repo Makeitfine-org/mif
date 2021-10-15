@@ -7,7 +7,8 @@
 
 package com.stingion.makeitfine.data.model.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.stingion.makeitfine.data.model.UserProfile;
 import com.stingion.makeitfine.data.model.utils.AttrConverter;
 import com.stingion.makeitfine.data.model.utils.State;
@@ -55,8 +56,8 @@ public class User {
     @Column(name = "SSO_ID", nullable = false, unique = true)
     private String ssoId;
 
-    @JsonIgnore
     @Column(name = "PASSWORD", nullable = false)
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
 
     @Column(name = "EMAIL", nullable = false, unique = true)

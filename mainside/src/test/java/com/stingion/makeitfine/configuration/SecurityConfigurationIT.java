@@ -11,6 +11,7 @@ import static com.stingion.makeitfine.testconfiguration.TestConstants.SECURE_RAN
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
 import com.stingion.makeitfine.data.model.user.User;
 import com.stingion.makeitfine.data.model.utils.State;
@@ -21,7 +22,10 @@ import java.util.Optional;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -31,6 +35,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Slf4j
 @SuppressWarnings("ConfigurationProperties")
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -56,10 +61,24 @@ class SecurityConfigurationIT {
 
     private String hostPort;
 
+    @Autowired
+    private ObjectMapper mapper;
+
     @PostConstruct
     public void init() {
         hostPort = protocolHost + ":" + port;
         restTemplate = restTemplate.withBasicAuth(username, password);
+    }
+
+    @BeforeAll
+    public void beforeAll() {
+        mapper.setAnnotationIntrospector(new IgnoreJacksonWriteOnlyAccess());
+    }
+
+    @SuppressWarnings("argument.type.incompatible")
+    @AfterAll
+    public void afterAll() {
+        mapper.setAnnotationIntrospector(null);
     }
 
     @Test

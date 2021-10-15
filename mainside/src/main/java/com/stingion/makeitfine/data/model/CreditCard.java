@@ -7,7 +7,8 @@
 
 package com.stingion.makeitfine.data.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.stingion.makeitfine.data.model.user.Contact;
 import com.stingion.makeitfine.data.model.utils.CardType;
 import java.util.Set;
@@ -68,6 +69,6 @@ public class CreditCard {
     private Contact contact;
 
     @OneToMany(mappedBy = "creditCard", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Set<Ordering> orders;
 }
