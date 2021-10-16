@@ -121,6 +121,7 @@
         <sonar.organization>makeitfine-org</sonar.organization>
         <!--suppress UnresolvedMavenProperty -->
         <sonar.login>${mvn.sonar.login}</sonar.login>
+        <kotlin.version>1.5.31</kotlin.version>
     </properties>
 
     <repositories>
@@ -253,7 +254,7 @@
         <module>util</module>
         <module>cache-service</module>
         <module>kafka</module>
-        <module>yaypay</module>
+        <!--        <module>yaypay</module>-->
     </modules>
 
     <profiles>
@@ -542,6 +543,32 @@
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>3.8.0.2131</version>
+                </plugin>
+                <plugin>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <version>${kotlin.version}</version>
+                    <configuration>
+                        <compilerPlugins>
+                            <plugin>jpa</plugin>
+                            <plugin>spring</plugin>
+                        </compilerPlugins>
+                        <args>
+                            <arg>-Xjsr305=strict</arg>
+                        </args>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-noarg</artifactId>
+                            <version>${kotlin.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-allopen</artifactId>
+                            <version>${kotlin.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>

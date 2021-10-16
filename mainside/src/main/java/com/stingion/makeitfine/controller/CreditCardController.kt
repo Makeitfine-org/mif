@@ -48,7 +48,7 @@ class CreditCardController(@Autowired val creditCardService: CreditCardService) 
         fun max(): String
     }
 
-    @SuppressFBWarnings("SA_LOCAL_SELF_ASSIGNMENT")
+    @SuppressFBWarnings("SA_LOCAL_SELF_ASSIGNMENT", "UPM_UNCALLED_PRIVATE_METHOD")
     class CreditCardModern(id: Int?) : CreditCardIdAndNumber(id), minAndMax {
         private val inverseDigits: Int = if (id != null) {
             StringBuilder(abs(id).toString()).reverse().toString().toInt()
