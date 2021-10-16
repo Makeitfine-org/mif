@@ -1,0 +1,84 @@
+/*
+ *  Created under not commercial project "Make it fine"
+ *
+ *  Copyright 2017-2021
+ */
+CREATE TABLE COMPANY
+(
+    ID   INT         NOT NULL,
+    NAME VARCHAR(50) NOT NULL,
+    DESCRIPTION TEXT,
+    PRIMARY KEY (ID)
+);
+
+INSERT INTO COMPANY
+VALUES (1, 'Repair brothers', 'Repairing of houses, flats');
+
+INSERT INTO COMPANY
+VALUES (2, 'Maker and co', 'Building and repairing');
+
+INSERT INTO COMPANY
+VALUES (3, 'FOP Stepko I. F.', 'Repairing of houses, flats, small works');
+
+INSERT INTO COMPANY
+VALUES (4, 'Building in Ukraine', 'Different type of building in state');
+
+INSERT INTO SEQUENCES
+VALUES ('COMPANY_SEQUENCE', 5);
+
+CREATE TABLE COMPANY_TYPE
+(
+    ID   INT         NOT NULL,
+    TYPE VARCHAR(300) NOT NULL,
+    DESCRIPTION TEXT,
+    PRIMARY KEY (ID)
+);
+
+INSERT INTO COMPANY_TYPE
+VALUES (1, 'Building', null);
+
+INSERT INTO COMPANY_TYPE
+VALUES (2, 'Repairing', 'Repairing');
+
+INSERT INTO COMPANY_TYPE
+VALUES (3, 'Building and repairing', null);
+
+INSERT INTO COMPANY_TYPE
+VALUES (4, 'Small repairing', null);
+
+INSERT INTO SEQUENCES
+VALUES ('COMPANY_TYPE_SEQUENCE', 5);
+
+CREATE TABLE COMPANY_COMPANY_TYPE
+(
+    COMPANY_ID      INT NOT NULL,
+    COMPANY_TYPE_ID INT NOT NULL,
+    PRIMARY KEY (COMPANY_ID, COMPANY_TYPE_ID),
+    FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY (ID),
+    FOREIGN KEY (COMPANY_TYPE_ID) REFERENCES COMPANY_TYPE (ID)
+);
+
+INSERT INTO COMPANY_COMPANY_TYPE
+VALUES (1, 2),
+       (1, 3),
+       (2, 3),
+       (2, 1),
+       (3, 4),
+       (4, 1);
+
+CREATE TABLE ORDERING_INFO
+(
+    ID          INT NOT NULL,
+    ORDERING_ID INT NOT NULL,
+    COMPANY_ID  INT,
+    INFO TEXT,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (ORDERING_ID) REFERENCES ORDERING (ID),
+    FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY (ID)
+);
+
+INSERT INTO ORDERING_INFO
+VALUES (3, 4, null, null);
+
+INSERT INTO SEQUENCES
+VALUES ('ORDERING_INFO_SEQUENCE', 4);

@@ -80,28 +80,29 @@ class CreditCardController(@Autowired val creditCardService: CreditCardService) 
 
     @GetMapping("{id}")
     @ApiOperation("Get creditCard by Id")
-    fun getCreditCard(@PathVariable
-                      @ApiParam(
-                              value = "Specify creditCard id",
-                              defaultValue = "any positive number",
-                              required = true
-                      ) id: Int
+    fun getCreditCard(
+        @PathVariable
+        @ApiParam(
+            value = "Specify creditCard id",
+            defaultValue = "any positive number",
+            required = true
+        ) id: Int
     ) = creditCardService.findById(id)
 
     @GetMapping("entities")
     fun probe(): List<CreditCardIdAndNumber> = listOf(
-            CreditCardIdAndNumber(11111),
-            CreditCardIdAndNumber(0),
-            CreditCardIdAndNumber(-33),
-            CreditCardModern(222),
-            CreditCardModern(-52341),
-            CreditCardModern(-52341, "Hi, there!!!")
+        CreditCardIdAndNumber(11111),
+        CreditCardIdAndNumber(0),
+        CreditCardIdAndNumber(-33),
+        CreditCardModern(222),
+        CreditCardModern(-52341),
+        CreditCardModern(-52341, "Hi, there!!!")
     );
 
     @GetMapping("entityVals")
     fun other(): List<EntityVal> = listOf(
-            EntityVal(1, "one"),
-            EntityVal(2, "two"),
-            EntityVal(3, "three")
+        EntityVal(1, "one"),
+        EntityVal(2, "two"),
+        EntityVal(3, "three")
     );
 }
