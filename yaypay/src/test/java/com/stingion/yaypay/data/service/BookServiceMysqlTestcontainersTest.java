@@ -6,6 +6,7 @@
 
 package com.stingion.yaypay.data.service;
 
+import static com.stingion.yaypay.data.repository.DatasourceConfig.MYSQL_DOCKER_IMAGE_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -34,7 +35,7 @@ public class BookServiceMysqlTestcontainersTest {
 
     @SuppressWarnings("CPD-START")
     @Container
-    private static final MySQLContainer<?> MY_SQL_CONTAINER = new MySQLContainer<>()
+    private static final MySQLContainer<?> MY_SQL_CONTAINER = new MySQLContainer<>(MYSQL_DOCKER_IMAGE_NAME)
             .withDatabaseName("jooq_db")
             .withUsername("sa")
             .withPassword("sa");

@@ -6,6 +6,7 @@
 
 package com.stingion.yaypay.data.repository;
 
+import static com.stingion.yaypay.data.repository.DatasourceConfig.MYSQL_DOCKER_IMAGE_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -32,6 +33,7 @@ import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+@Disabled
 @SuppressFBWarnings("BC_UNCONFIRMED_CAST_OF_RETURN_VALUE")
 @Slf4j
 @ActiveProfiles("test")
@@ -41,7 +43,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 public class AnyRepository2Test {
 
     @Container
-    private static final MySQLContainer<?> MY_SQL_CONTAINER = new MySQLContainer<>()
+    private static final MySQLContainer<?> MY_SQL_CONTAINER = new MySQLContainer<>(MYSQL_DOCKER_IMAGE_NAME)
             .withDatabaseName("db")
             .withUsername("sa")
             .withPassword("sa");

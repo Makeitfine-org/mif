@@ -27,11 +27,13 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SuppressWarnings({"all","CPD-START"})
+@SuppressWarnings({"all", "CPD-START"})
 @SuppressFBWarnings({"NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE"})
 @EnableTransactionManagement
 @TestConfiguration
 public class DatasourceConfig {
+
+    public static final String MYSQL_DOCKER_IMAGE_NAME = "mysql:8.0.26";
 
     @Primary
     @Bean(name = "mysqlDatasource")

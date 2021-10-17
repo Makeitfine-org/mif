@@ -19,7 +19,7 @@
     <artifactId>yaypay</artifactId>
 
     <properties>
-        <testcontainers.version>1.14.3</testcontainers.version>
+        <testcontainers.version>1.16.0</testcontainers.version>
         <junit5.version>5.4.2</junit5.version>
         <flyway-test-extensions>6.4.0</flyway-test-extensions>
         <jooq.version>3.13.4</jooq.version>
@@ -130,7 +130,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>exasol-testcontainers</artifactId>
-            <version>3.0.0</version>
+            <version>5.1.0</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.exasol/exasol-jdbc -->

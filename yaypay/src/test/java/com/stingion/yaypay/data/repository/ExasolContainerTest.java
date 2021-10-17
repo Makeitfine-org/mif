@@ -6,6 +6,7 @@
 
 package com.stingion.yaypay.data.repository;
 
+import static com.stingion.yaypay.data.repository.DatasourceConfig.MYSQL_DOCKER_IMAGE_NAME;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.exasol.containers.ExasolContainer;
@@ -27,6 +28,7 @@ import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+@Disabled
 @SuppressWarnings("all")
 @SuppressFBWarnings("BC_UNCONFIRMED_CAST_OF_RETURN_VALUE")
 @Slf4j
@@ -46,7 +48,7 @@ public class ExasolContainerTest {
                     .withLogConsumer(new Slf4jLogConsumer(log));
 
     @Container
-    private static final MySQLContainer<?> MYSQL_CONTAINER = new MySQLContainer<>()
+    private static final MySQLContainer<?> MYSQL_CONTAINER = new MySQLContainer<>(MYSQL_DOCKER_IMAGE_NAME)
             .withDatabaseName("db")
             .withUsername("sa")
             .withPassword("sa");
@@ -73,7 +75,6 @@ public class ExasolContainerTest {
         }
     }
 
-    @Disabled
     @Test
     void test() {
         assertTrue(jdbcTemplate.queryForList("show databases")

@@ -254,7 +254,7 @@
         <module>util</module>
         <module>cache-service</module>
         <module>kafka</module>
-        <!--        <module>yaypay</module>-->
+        <module>yaypay</module>
     </modules>
 
     <profiles>
